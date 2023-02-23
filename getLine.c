@@ -20,11 +20,11 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-	#if USE_GETLINE
+#if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
-	else
+#else
 		r = _getline(info, buf, &len_p);
-	#endif
+#endif
 		if (r > 0)
 		{
 			if ((*buf)[r - 1] == '\n')
@@ -35,7 +35,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
-			/* if (_strchr(*buf, ';')) is this a command chain?*/
+			/* if (_strchr(*buf, ';')) is this a command chain? */
 			{
 				*len = r;
 				info->cmd_buf = buf;
@@ -44,7 +44,6 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 	}
 	return (r);
 }
-
 /**
  * get_input - gets a line minus the newline
  * @info: parameter struct
