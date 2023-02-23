@@ -64,6 +64,7 @@ int set_alias(info_t *info, char *str)
  */
 
 int print_alias(list_t *node)
+
 {
 	char *p = NULL, *a = NULL;
 
